@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("simple-social-feed")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+1b30a81cac10ad20e6d613d417088a943a7e38d4")]
 [assembly: System.Reflection.AssemblyProductAttribute("simple-social-feed")]
 [assembly: System.Reflection.AssemblyTitleAttribute("simple-social-feed")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

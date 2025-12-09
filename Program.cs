@@ -29,7 +29,7 @@ builder.Services.AddOpenApi();
 
 builder.Services.AddDbContext<SimpleSocialFeedContext>(options => options.UseSqlite(builder.Configuration.GetConnectionString("DefaultConnection")));
 
-
+builder.Services.AddScoped<PasswordService>();
 
 var app = builder.Build();
 

@@ -10,7 +10,7 @@ using SimpleSocialFeed;
 namespace simple_social_feed.Migrations
 {
     [DbContext(typeof(SimpleSocialFeedContext))]
-    [Migration("20251209165733_initialCreate")]
+    [Migration("20251212161712_initialCreate")]
     partial class initialCreate
     {
         /// <inheritdoc />
@@ -25,7 +25,7 @@ namespace simple_social_feed.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
-                    b.Property<string>("Describetion")
+                    b.Property<string>("Describtion")
                         .HasColumnType("TEXT");
 
                     b.Property<string>("Title")

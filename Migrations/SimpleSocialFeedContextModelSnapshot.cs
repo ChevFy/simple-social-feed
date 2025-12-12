@@ -22,7 +22,7 @@ namespace simple_social_feed.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
-                    b.Property<string>("Describetion")
+                    b.Property<string>("Describtion")
                         .HasColumnType("TEXT");
 
                     b.Property<string>("Title")

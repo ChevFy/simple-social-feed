@@ -1,6 +1,7 @@
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -35,7 +36,7 @@ namespace SimpleSocialFeed
 				return BadRequest("Wrong password");
 			}
 
-			string token = GenerateJwtToken(request.Username);
+			string token = GenerateJwtToken(user.Id);
 			return Ok(new { token }); ;
 		}
 
@@ -63,12 +64,44 @@ namespace SimpleSocialFeed
 			return Ok("Registered");
 		}
 
-		private string GenerateJwtToken(string username)
+		[HttpPut("changepassword")]
+		[Authorize]
+		public async Task<IActionResult> ChangePassword([FromBody] UserChangePassword request)
 		{
+			int userId = int.Parse(User.FindFirst("user_id")!.Value);
+			var user = await _db.Users.FindAsync(userId);
+			if(user is null)
+				return NotFound();
+
+			if(!_passwordService.VerifyPassword(request.OldPassword, user.passwordHash , user.passwordSalt))
+				return BadRequest("Old password doesn't match!!");
+
+			_passwordService.CreatePasswordHash(request.NewPassword , out byte[] newHash, out byte[] newSalt);
+
+			User updatedUser = new User
+			{
+				Id = userId,
+				Username = user.Username,
+				passwordHash = newHash,
+				passwordSalt = newSalt,
+				Posts = user.Posts
+			};
+
+
+			_db.Entry(user).CurrentValues.SetValues(updatedUser);
+			await _db.SaveChangesAsync();
+
+			return Ok(new { sucesss = "Change Password Success" });
+		}
+
+		private string GenerateJwtToken(int UserId)
+		{
+			string Id = Convert.ToString(UserId);
+
 			var claims = new[]
 			{
-				new Claim(JwtRegisteredClaimNames.Sub, username) ,
-				new Claim(ClaimTypes.Name, username),
+				new Claim(JwtRegisteredClaimNames.Sub, Id) ,
+				new Claim("user_id", Id.ToString(), ClaimValueTypes.Integer),
 				new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString())
 			};
 

@@ -1,6 +1,8 @@
 
 using System.Net.NetworkInformation;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace SimpleSocialFeed
 {
@@ -17,11 +19,20 @@ namespace SimpleSocialFeed
 			_config = config;
 		}
 
-		// [HttpGet("/posts/")]
-		// public async Task<IActionResult> GetAllPost()
-		// {
-			
-		// }
+		[HttpGet("posts")]
+		[Authorize]
+		public async Task<IActionResult> GetUserPosts()
+		{
+			var userIdClaim = User.FindFirst("user_id");
+			if(userIdClaim is null)
+				return Unauthorized("Please Login!!");
+
+			int userId = int.Parse(userIdClaim.Value);
+			var posts = await _db.Posts.Where(p => p.UserId == userId).ToListAsync();
+
+			return Ok(posts);
+
+		}
 
 	}
 	

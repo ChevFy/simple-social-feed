@@ -28,18 +28,29 @@ namespace SimpleSocialFeed
 			return Ok(Posts);
 		}
 
+		[HttpGet("page")]
+		public async Task<IActionResult> GetPosts(int skip , int take)
+		{
+			var posts = await _db.Posts.OrderBy(p => p.Id).Skip(skip).Take(take).ToArrayAsync();
+
+			return Ok(posts);
+		}
+
 
 		// [HttpGet("/posts?skip={skip}&take={take}")]
 
 
 		[HttpPost]
 		[Authorize]
-		public async Task<IActionResult> CreatedPost([FromBody] newPost request)
+		public async Task<IActionResult> CreatedPost([FromBody] CreatePostDto request)
 		{
 			if (!ModelState.IsValid)
 				return BadRequest(ModelState);
 
-			int userId =  int.Parse(User.FindFirst("user_id")!.Value);
+			var userIdClaim =  User.FindFirst("user_id");
+			if(userIdClaim is null)
+				return Unauthorized("Please Login!!");
+			int userId = int.Parse(userIdClaim.Value);
 			var post = new Post
 			{
 				Title = request.Title,

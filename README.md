@@ -23,3 +23,7 @@ dotnet run
 
 - App will listen on:
   - http: http://localhost:5264
+
+---
+This is my first project written in C# and .NET, and my begining experience with backend development.
+In this project, I explored fundamental backend concepts including JWT, DTO, MVC, and Entity Framework (ORM).

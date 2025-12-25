@@ -1,0 +1,29 @@
+@{
+    ViewData["Title"] = "All Posts";
+}
+
+<section class="hero">
+    <div>
+        <p class="eyebrow">Community Feed</p>
+        <h1>Latest posts from everyone</h1>
+        <p class="lede">Browse posts shared by the community. Refresh to see the latest updates.</p>
+        <div class="hero-actions">
+            <button type="button" id="refreshFeed" class="primary-btn">🔄 Refresh Feed</button>
+            <a href="/create-post" class="ghost-btn" data-auth-only>✍️ Create Post</a>
+        </div>
+    </div>
+</section>
+
+<section class="grid one-col">
+    <div class="card">
+        <div class="card-header">
+            <div>
+                <p class="eyebrow">Feed</p>
+                <h2>All Posts</h2>
+            </div>
+            <span class="pill" id="postCount">Loading...</span>
+        </div>
+        <div id="feedStatus" class="status"></div>
+        <div id="feedList" class="list"></div>
+    </div>
+</section>

@@ -1,0 +1,39 @@
+@{
+    ViewData["Title"] = "Login";
+}
+
+<section class="hero">
+    <div>
+        <p class="eyebrow">Authentication</p>
+        <h1>Sign in to your account</h1>
+        <p class="lede">Enter your credentials to access your account and start sharing posts.</p>
+    </div>
+</section>
+
+<section class="grid one-col">
+    <div class="card">
+        <div class="card-header">
+            <div>
+                <p class="eyebrow">Login</p>
+                <h2>Welcome back</h2>
+            </div>
+        </div>
+        <form id="loginForm" class="stack" novalidate>
+            <label class="field">
+                <span>Username <span class="required">*</span></span>
+                <input type="text" id="loginUsername" placeholder="your handle" required />
+                <span class="error-message" id="usernameError"></span>
+            </label>
+            <label class="field">
+                <span>Password <span class="required">*</span></span>
+                <input type="password" id="loginPassword" placeholder="••••••••" required />
+                <span class="error-message" id="passwordError"></span>
+            </label>
+            <button type="submit" class="primary-btn">Sign in</button>
+            <div id="loginStatus" class="status"></div>
+        </form>
+        <div class="form-footer">
+            <p>Don't have an account? <a href="/register">Register here</a></p>
+        </div>
+    </div>
+</section>

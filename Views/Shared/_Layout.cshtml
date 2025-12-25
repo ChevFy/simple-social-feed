@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+	<title>@ViewData["Title"] - Simple Social Feed</title>
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+	<link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+</head>
+<body>
+	<div class="page">
+		<header class="topbar">
+			<div class="brand-nav">
+				<a href="/" class="brand">Simple Social Feed</a>
+				<nav class="main-nav">
+					<a href="/" class="nav-link">Home</a>
+					<a href="/posts" class="nav-link">Posts</a>
+					<a href="/create-post" class="nav-link" data-auth-only>Create</a>
+					<a href="/my-posts" class="nav-link" data-auth-only>My Posts</a>
+				</nav>
+			</div>
+			<div class="top-actions">
+				<a href="/login" class="ghost-btn" data-guest-only>Login</a>
+				<a href="/register" class="ghost-btn" data-guest-only>Register</a>
+				<button id="logoutBtn" class="ghost-btn" data-auth-only>Logout</button>
+				<span id="authStatus" class="pill pill-muted">Guest</span>
+			</div>
+		</header>
+
+		<main class="content">
+			@RenderBody()
+		</main>
+
+		<footer class="footer">
+			<span>Built for the Simple Social Feed sample · @DateTime.UtcNow.Year</span>
+		</footer>
+	</div>
+
+	<script src="~/js/app.js" asp-append-version="true"></script>
+</body>
+</html>

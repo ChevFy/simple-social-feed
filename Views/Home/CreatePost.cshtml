@@ -1,0 +1,40 @@
+@{
+    ViewData["Title"] = "Create Post";
+}
+
+<section class="hero">
+    <div>
+        <p class="eyebrow">Share Your Thoughts</p>
+        <h1>Create a new post</h1>
+        <p class="lede">Share what's on your mind with the community.</p>
+    </div>
+</section>
+
+<section class="grid one-col">
+    <div class="card">
+        <div class="card-header">
+            <div>
+                <p class="eyebrow">Compose</p>
+                <h2>What do you want to share?</h2>
+            </div>
+            <span class="pill pill-muted">Requires login</span>
+        </div>
+        <form id="createPostForm" class="stack" novalidate>
+            <label class="field">
+                <span>Title <span class="required">*</span></span>
+                <input type="text" id="postTitle" placeholder="Enter a title for your post" required minlength="3" maxlength="200" />
+                <span class="error-message" id="postTitleError"></span>
+            </label>
+            <label class="field">
+                <span>Description</span>
+                <textarea id="postDescription" rows="6" placeholder="Write your post content here (optional)" maxlength="1000"></textarea>
+                <span class="error-message" id="postDescriptionError"></span>
+            </label>
+            <button type="submit" class="primary-btn">Publish Post</button>
+            <div id="createPostStatus" class="status"></div>
+        </form>
+        <div class="form-footer">
+            <p><a href="/posts">← Back to feed</a> | <a href="/my-posts">View my posts</a></p>
+        </div>
+    </div>
+</section>

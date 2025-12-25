@@ -1,0 +1,59 @@
+@{
+    ViewData["Title"] = "My Posts";
+}
+
+<section class="hero">
+    <div>
+        <p class="eyebrow">Your Content</p>
+        <h1>Manage your posts</h1>
+        <p class="lede">View, edit, and delete posts you've created.</p>
+        <div class="hero-actions">
+            <button type="button" id="refreshMyPosts" class="primary-btn">🔄 Refresh</button>
+            <a href="/create-post" class="ghost-btn">✍️ Create New Post</a>
+        </div>
+    </div>
+</section>
+
+<section class="grid one-col">
+    <div class="card">
+        <div class="card-header">
+            <div>
+                <p class="eyebrow">Your Posts</p>
+                <h2>Posts you've created</h2>
+            </div>
+            <span class="pill pill-muted" id="myPostCount">Loading...</span>
+        </div>
+        <div id="myPostsStatus" class="status"></div>
+        <div id="myPostsList" class="list"></div>
+    </div>
+</section>
+
+<section class="grid one-col">
+    <div class="card">
+        <div class="card-header">
+            <div>
+                <p class="eyebrow">Security</p>
+                <h2>Change password</h2>
+            </div>
+        </div>
+        <form id="changePasswordForm" class="stack" novalidate>
+            <label class="field">
+                <span>Old password <span class="required">*</span></span>
+                <input type="password" id="oldPassword" placeholder="current password" required />
+                <span class="error-message" id="oldPasswordError"></span>
+            </label>
+            <label class="field">
+                <span>New password <span class="required">*</span></span>
+                <input type="password" id="newPassword" placeholder="new password" required minlength="6" />
+                <span class="error-message" id="newPasswordError"></span>
+            </label>
+            <label class="field">
+                <span>Confirm new password <span class="required">*</span></span>
+                <input type="password" id="confirmNewPassword" placeholder="repeat new password" required />
+                <span class="error-message" id="confirmNewPasswordError"></span>
+            </label>
+            <button type="submit" class="primary-btn">Update password</button>
+            <div id="changePasswordStatus" class="status"></div>
+        </form>
+    </div>
+</section>

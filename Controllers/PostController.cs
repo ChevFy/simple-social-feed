@@ -22,46 +22,45 @@ namespace SimpleSocialFeed
 		[HttpGet]
 		public async Task<IActionResult> GetAllPost()
 		{
-			var Posts = await _db.Posts.ToListAsync() ;
-			if(Posts.Count == 0)
+			var posts = await _db.Posts
+				.Include(p => p.User)
+				.OrderByDescending(p => p.DateCreated)
+				.Select(p => new PostDTO
+				{
+					Id = p.Id,
+					Title = p.Title,
+					Describtion = p.Describtion,
+					DateCreated = p.DateCreated,
+					Username = p.User != null ? p.User.Username : "Unknown"
+				})
+				.ToListAsync();
+
+			if (posts.Count == 0)
 				return NotFound("Not found");
-			return Ok(Posts);
+			return Ok(posts);
 		}
 
 		[HttpGet("page")]
 		public async Task<IActionResult> GetPosts(int skip , int take)
 		{
-			var posts = await _db.Posts.OrderBy(p => p.Id).Skip(skip).Take(take).ToArrayAsync();
+			var posts = await _db.Posts
+				.Include(p => p.User)
+				.OrderByDescending(p => p.DateCreated)
+				.Skip(skip)
+				.Take(take)
+				.Select(p => new PostDTO
+				{
+					Id = p.Id,
+					Title = p.Title,
+					Describtion = p.Describtion,
+					DateCreated = p.DateCreated,
+					Username = p.User != null ? p.User.Username : "Unknown"
+				})
+				.ToArrayAsync();
 
 			return Ok(posts);
 		}
 
-
-		// [HttpGet("/posts?skip={skip}&take={take}")]
-
-
-		[HttpPost]
-		[Authorize]
-		public async Task<IActionResult> CreatedPost([FromBody] CreatePostDto request)
-		{
-			if (!ModelState.IsValid)
-				return BadRequest(ModelState);
-
-			var userIdClaim =  User.FindFirst("user_id");
-			if(userIdClaim is null)
-				return Unauthorized("Please Login!!");
-			int userId = int.Parse(userIdClaim.Value);
-			var post = new Post
-			{
-				Title = request.Title,
-				Describtion = request.Describtion,
-				UserId = userId,
-			};
-			_db.Posts.Add(post);
-			await _db.SaveChangesAsync();
-
-			return Ok( new { success = "success" });
-		}
 		
 	}
 }

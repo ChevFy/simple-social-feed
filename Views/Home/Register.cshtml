@@ -1,0 +1,44 @@
+@{
+    ViewData["Title"] = "Register";
+}
+
+<section class="hero">
+    <div>
+        <p class="eyebrow">Join Us</p>
+        <h1>Create a new account</h1>
+        <p class="lede">Sign up to start sharing your thoughts and connect with the community.</p>
+    </div>
+</section>
+
+<section class="grid one-col">
+    <div class="card">
+        <div class="card-header">
+            <div>
+                <p class="eyebrow">Register</p>
+                <h2>Get started</h2>
+            </div>
+        </div>
+        <form id="registerForm" class="stack" novalidate>
+            <label class="field">
+                <span>Username <span class="required">*</span></span>
+                <input type="text" id="registerUsername" placeholder="pick a handle" required minlength="3" />
+                <span class="error-message" id="registerUsernameError"></span>
+            </label>
+            <label class="field">
+                <span>Password <span class="required">*</span></span>
+                <input type="password" id="registerPassword" placeholder="••••••••" required minlength="6" />
+                <span class="error-message" id="registerPasswordError"></span>
+            </label>
+            <label class="field">
+                <span>Confirm password <span class="required">*</span></span>
+                <input type="password" id="registerConfirm" placeholder="repeat password" required />
+                <span class="error-message" id="registerConfirmError"></span>
+            </label>
+            <button type="submit" class="primary-btn">Sign up</button>
+            <div id="registerStatus" class="status"></div>
+        </form>
+        <div class="form-footer">
+            <p>Already have an account? <a href="/login">Sign in here</a></p>
+        </div>
+    </div>
+</section>
